@@ -81,6 +81,10 @@
                 &.success:hover { background-color: var(--success-hover); }
                 &.success:active { background-color: var(--success-active); }
 
+                &.danger { background-color: var(--danger); }
+                &.danger:hover { background-color: var(--danger-hover); }
+                &.danger:active { background-color: var(--danger-active); }
+
                 font-size: var(--fs-md);
                 text-transform: uppercase;
             }
