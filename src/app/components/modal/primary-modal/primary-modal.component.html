@@ -2,9 +2,11 @@
     <div class="modal">
         <h1 class="title">{{ conf.title }}</h1>
         
-        <p class="text" *ngFor="let text of conf.content">{{ text }}</p>
+        <div class="content">
+            <p class="text" *ngFor="let text of conf.content">{{ text }}</p>
+        </div>
 
-        <div class="footer">
+        <!-- <div class="footer">
             <primary-button
                 *ngIf="conf.onAccept"
                 [id]="'primary-modal-success-btn-' + level"
@@ -27,6 +29,28 @@
                 [styles]="{ width: '100px', padding: '.5rem .25rem' }"
                 (onClick)="onDefaultClick($event)"
             >Aceptar</primary-button>
+        </div> -->
+
+        <div class="footer">
+            <button 
+                *ngIf="conf.onAccept"
+                class="success"
+                [id]="'primary-modal-success-btn-' + level"
+                (click)="onAcceptClick($event)"
+            >Aceptar</button>
+
+            <button 
+                *ngIf="conf.onCancel"
+                class="danger"
+                [id]="'primary-modal-danger-btn-' + level"
+                (click)="onCancelClick($event)"
+            >Cancelar</button>
+
+            <button 
+                *ngIf="!conf.onAccept && !conf.onCancel"
+                [id]="'primary-modal-default-btn-' + level"
+                (click)="onDefaultClick($event)"
+            >Cancelar</button>
         </div>
     </div>
 </div>

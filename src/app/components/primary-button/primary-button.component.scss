@@ -6,7 +6,7 @@
     width: 100%;
     width: fit-content;
     max-width: 200px;
-    padding: .6rem;
+    padding: 1rem .6rem;
 
     display: flex;
     flex-direction: row;
@@ -18,7 +18,7 @@
     background-color: var(--primary);
     color: white;
 
-    font-size: 15px;
+    font-size: var(--fs-md, 15px);
     text-align: center;
     text-decoration: none;
 
