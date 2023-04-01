@@ -10,6 +10,7 @@
           "skipTests": true
         },
         "@schematics/angular:component": {
+          "style": "scss",
           "skipTests": true
         },
         "@schematics/angular:directive": {
@@ -44,20 +45,21 @@
             "polyfills": [
               "zone.js"
             ],
+            "inlineStyleLanguage": "scss",
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+                "src/styles/fonts.scss",
+                "src/styles/styles.scss"
             ],
             "scripts": []
           },
           "configurations": {
             "production": {
-              "budgets": [
-                {
+              "budgets": [{
                   "type": "initial",
                   "maximumWarning": "500kb",
                   "maximumError": "1mb"
@@ -107,17 +109,22 @@
               "zone.js/testing"
             ],
             "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+                "src/styles/fonts.scss",
+                "src/styles/styles.scss"
             ],
             "scripts": []
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "8e16f25a-ed97-46da-8b94-c3651e7adca5"
   }
 }
