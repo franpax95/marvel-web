@@ -1,0 +1,42 @@
+<div class="CardComponent">
+    <div class="image-background" *ngIf="character">
+        <img 
+            [ngClass]="{ hidden: loading }"
+            [src]="getSrc()" 
+            [alt]="character.name"
+            (load)="onImageLoaded($event)"
+        />
+    </div>
+
+    <div class="fade-background" [ngClass]="{ hidden: loading }" *ngIf="character"></div>
+
+    <div class="content" *ngIf="character && !loading">
+        <div class="name">
+            <h4>
+                {{ character.name }}
+            </h4>
+        </div>
+
+        <div class="description">
+            <p>
+                {{ character.description.length > 120 ? character.description.slice(0, 120) + '...' : character.description }}
+            </p>
+        </div>
+
+        <div class="footer">
+            <span>See more</span>
+            <div class="icon">
+                <arrow-right-icon></arrow-right-icon>
+            </div>
+        </div>
+    </div>
+
+    <div class="content placeholder" *ngIf="!character || loading">
+        <div class="name"></div>
+        <div class="description"></div>
+        <div class="footer">
+            <span>See more</span>
+            <div class="icon"></div>
+        </div>
+    </div>
+</div>

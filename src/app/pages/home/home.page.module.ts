@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomePage } from './home.page';
-import { ComponentsModule } from 'src/modules/components.module';
+import { ComponentsModule } from 'src/app/modules/components.module';
 
 @NgModule({
     imports: [
