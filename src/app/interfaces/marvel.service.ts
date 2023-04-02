@@ -1,11 +1,11 @@
 import { ICharacterDataWrapper } from './../interfaces/ICharacterDataWrapper';
-import { ICharacter } from './../interfaces/ICharacter';
 import { SettingsService } from 'src/app/services/settings.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, tap, throwError, BehaviorSubject, Subscription, skip } from 'rxjs';
 import keys from '../../../marvel.json';
 import md5 from 'md5';
+import { ICharacter } from '../interfaces/ICharacter';
 
 @Injectable({
     providedIn: 'root'
@@ -79,14 +79,14 @@ export class MarvelService {
         const query = this.query({ limit, nameStartsWith, offset });
 
         return this.http
-            .get<any>(`${this.BASE_URL}/v1/public/characters?${auth}&${query}`)
+            .get<ICharacterDataWrapper>(`${this.BASE_URL}/v1/public/characters?${auth}&${query}`)
             .pipe(
                 tap(({ data }) => {
                     const { results } = data;
 
                     this.setCharacters([
                         ...this.characters.filter(character => character !== null).slice(0, offset), 
-                        ...results
+                        ...results.map((character: ICharacter) => ({ ...character, loading: true }))
                     ]);
                 }),
                 catchError(this.handleError)
@@ -96,9 +96,7 @@ export class MarvelService {
 
     /********************************************************************************************************************/
 
-    /**
-     * Return the Marvel API authorization hash 
-     */
+
     private auth(ts: number): string {
         return `ts=${ts}&apikey=${keys.public}&hash=${this.hash(ts)}`
     }
@@ -145,15 +143,15 @@ export class MarvelService {
     }
 
     /**
-     * Set the characters passed as argument
+     * 
      */
-    public setCharacters(characters: Array<ICharacter>): void {
+    public setCharacters(characters: Array<any>): void {
         this.characters = characters;
         this.charactersSub.next(this.characters);
     }
 
     /**
-     * Set the serach string passed as argument
+     * 
      */
     public setSearch(search: string): void {
         this.search = search;
