@@ -1,3 +1,14 @@
 <main id="HomePage" class="HomePage">
     <primary-button (onClick)="onModalOpen()">Abrir modal con anidación</primary-button>
+    <primary-button (onClick)="onClick()">Fake call</primary-button>
+    <primary-button [className]="'secondary'" (onClick)="onSearchBtnClick()">Fake search change</primary-button>
+
+    <label>Search:</label>
+    <input [(ngModel)]="search" (ngModelChange)="onChange($event)" />
+
+    <div 
+        *ngFor="let character of characters"
+    >
+        {{ character === null ? 'Placeholder' : character.name }}
+    </div>
 </main>

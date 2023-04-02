@@ -1,4 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { MarvelService } from 'src/app/services/marvel.service';
 import { SettingsService } from 'src/app/services/settings.service';
 
 @Component({
@@ -6,12 +8,35 @@ import { SettingsService } from 'src/app/services/settings.service';
     styleUrls: ['./home.page.scss']
 })
 export class HomePage implements OnInit, OnDestroy {
+    /** Search */
+    public search: string = '';
+    /** Collection of characters */
+    public characters: Array<any> = [];
+    /** Subscription to characters */
+    public charactersSubscription!: Subscription;
 
-    constructor(private settings: SettingsService) { }
+    constructor(private settings: SettingsService, private marvelService: MarvelService) { }
 
-    public ngOnInit(): void {}
+    public ngOnInit(): void {
+        this.charactersSubscription = this.marvelService.charactersObs.subscribe(characters => {
+            this.characters = characters;
+            console.dir(characters);
+        });
+    }
 
     public ngOnDestroy(): void {}
+
+    public onClick(): void {
+        this.marvelService.addCharactersPage();
+    }
+
+    onSearchBtnClick(): void {
+        this.marvelService.setSearch('A');
+    }
+
+    public onChange(search: string): void {
+        this.marvelService.setSearch(search);
+    }
 
     /**
      * Manejador de eventos del botón para lanzar modales anidados
