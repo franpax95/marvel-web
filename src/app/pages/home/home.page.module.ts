@@ -1,3 +1,4 @@
+import { IntersectionObserverDirective } from './../../directives/intersection-observer.directive';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -13,6 +14,6 @@ import { ComponentsModule } from 'src/app/modules/components.module';
         FormsModule,
         ComponentsModule,
     ],
-    declarations: [HomePage],
+    declarations: [HomePage, IntersectionObserverDirective],
 })
 export class HomeModule {}

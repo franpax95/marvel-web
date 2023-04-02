@@ -15,7 +15,7 @@ export class MarvelService {
     private readonly BASE_URL: string = 'https://gateway.marvel.com';
 
     /** Elements per 'page' */
-    private limit: number = 10;
+    private limit: number = 50;
     /** Current characters offset */
     private page: number = 1;
 
@@ -48,6 +48,12 @@ export class MarvelService {
 
             this.searchInterval = setTimeout(() => {
                 this.searchInterval = null;
+
+                // Limit can't be greater than 100
+                if (this.page * this.limit > 100) {
+                    this.page = Math.floor(100 / this.limit);
+                }
+
                 this.fetchCharacters({ limit: this.page * this.limit, nameStartsWith: search, offset: 0 })
                     .subscribe(() => {
                         // this.searchInterval = null;
