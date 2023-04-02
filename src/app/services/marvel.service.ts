@@ -15,7 +15,7 @@ export class MarvelService {
     private readonly BASE_URL: string = 'https://gateway.marvel.com';
 
     /** Elements per 'page' */
-    private limit: number = 2;
+    private limit: number = 10;
     /** Current characters offset */
     private page: number = 1;
 
