@@ -1,3 +1,4 @@
+import { IntersectionObserverDirective } from './../directives/intersection-observer.directive';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';

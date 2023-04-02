@@ -1,3 +1,4 @@
+import { IntersectionObserverDirective } from './../directives/intersection-observer.directive';
 import { PrimaryModalComponent } from '../components/modal/primary-modal/primary-modal.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';

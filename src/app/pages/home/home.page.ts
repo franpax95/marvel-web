@@ -1,7 +1,9 @@
+import { ICharacter } from './../../interfaces/ICharacter';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MarvelService } from 'src/app/services/marvel.service';
 import { SettingsService } from 'src/app/services/settings.service';
+import { getPromise } from 'src/app/utils';
 
 @Component({
     templateUrl: './home.page.html',
@@ -10,6 +12,7 @@ import { SettingsService } from 'src/app/services/settings.service';
 export class HomePage implements OnInit, OnDestroy {
     /** Search */
     public search: string = '';
+
     /** Collection of characters */
     public characters: Array<any> = [];
     /** Subscription to characters */
@@ -20,11 +23,18 @@ export class HomePage implements OnInit, OnDestroy {
     public ngOnInit(): void {
         this.charactersSubscription = this.marvelService.charactersObs.subscribe(characters => {
             this.characters = characters;
-            console.dir(characters);
+            // console.dir(characters);
         });
     }
 
     public ngOnDestroy(): void {}
+
+
+    public isIntersecting (status: boolean): void {
+        if (!this.characters.some((character: ICharacter) => (character === null))) {
+            this.marvelService.addCharactersPage();
+        }
+    }
 
     public onClick(): void {
         this.marvelService.addCharactersPage();
