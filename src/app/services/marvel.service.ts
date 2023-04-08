@@ -18,7 +18,7 @@ export class MarvelService {
     /** Elements per 'page' */
     private limit: number = 5;
     /** Current characters offset */
-    private page: number = 1;
+    private page: number = 0;
 
     /** Collection of characters */
     private characters: Array<ICharacter> = [];
