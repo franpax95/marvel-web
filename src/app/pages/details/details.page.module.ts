@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 
 import { FormsModule } from '@angular/forms';
 import { ComponentsModule } from 'src/app/modules/components.module';
+import { DetailsPage } from './details.page';
 
 @NgModule({
     imports: [
@@ -12,6 +13,6 @@ import { ComponentsModule } from 'src/app/modules/components.module';
         FormsModule,
         ComponentsModule,
     ],
-    declarations: [],
+    declarations: [DetailsPage],
 })
 export class DetailsModule {}

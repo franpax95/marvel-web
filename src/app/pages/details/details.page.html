@@ -1,3 +1,47 @@
-<div id="DetailsPage" class="DetailsPage">
+<div 
+    id="DetailsPage" 
+    class="DetailsPage"
+    [ngClass]="{ hide }"
+    [ngStyle]="{ 'transition-duration': HIDE_DURATION + 'ms' }"
+    *ngIf="character"
+>
+    <div class="background">
+        <img [src]="getSrc()" [alt]="character.name" (load)="onImageLoaded($event)" />
+        <div class="cover"></div>
+    </div>
 
+    <div class="details-wrapper custom-scroll">
+        <div class="preview">
+            <img [src]="getSrc()" [alt]="character.name" />
+
+            <div class="sources">
+                <!-- TODO: Añadir botones de URLs -->
+                <button>Botón</button>
+            </div>
+        </div>
+
+        <div class="title">
+            <h1 [title]="character.name">{{ character.name }}</h1>
+        </div>
+
+        <div class="content custom-scroll">
+            <div class="description" *ngIf="character.description !== ''">
+                <p>{{ character.description + ' ' + character.description }}</p>
+            </div>
+
+            <div class="comics">
+                <h4>Cómics</h4>
+                <p>
+                    <!-- TODO: Añadir comics cards -->
+                    Loren ipsum 
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
+
+<div 
+    class="hide-spinner"
+    [ngClass]="{ hide: !hide }" 
+    [ngStyle]="{ 'transition-duration': HIDE_DURATION + 'ms'}"
+></div>
