@@ -1,4 +1,4 @@
-<div class="CardComponent">
+<div class="CardComponent" [ngClass]="{ 'mobile': mobileDevice }" (click)="onClick($event)">
     <div class="image-background" *ngIf="character">
         <img 
             [ngClass]="{ hidden: loading }"

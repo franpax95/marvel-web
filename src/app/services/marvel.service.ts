@@ -6,6 +6,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, tap, throwError, BehaviorSubject, Subscription, skip } from 'rxjs';
 import keys from '../../../marvel.json';
 import md5 from 'md5';
+import { IImage } from '../interfaces/IImage';
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +16,7 @@ export class MarvelService {
     private readonly BASE_URL: string = 'https://gateway.marvel.com';
 
     /** Elements per 'page' */
-    private limit: number = 50;
+    private limit: number = 5;
     /** Current characters offset */
     private page: number = 1;
 
@@ -85,7 +86,7 @@ export class MarvelService {
         const query = this.query({ limit, nameStartsWith, offset });
 
         return this.http
-            .get<any>(`${this.BASE_URL}/v1/public/characters?${auth}&${query}`)
+            .get<ICharacterDataWrapper>(`${this.BASE_URL}/v1/public/characters?${auth}&${query}`)
             .pipe(
                 tap(({ data }) => {
                     const { results } = data;
@@ -97,6 +98,13 @@ export class MarvelService {
                 }),
                 catchError(this.handleError)
             );
+    }
+
+    /**
+     * Shortcut to get image src easily
+     */
+    public getSrc(image: IImage): string {
+        return `${image.path}.${image.extension}`;
     }
 
 
