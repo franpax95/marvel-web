@@ -3,7 +3,7 @@ import { ICharacter } from './../interfaces/ICharacter';
 import { SettingsService } from 'src/app/services/settings.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, Observable, tap, throwError, BehaviorSubject, Subscription, skip } from 'rxjs';
+import { catchError, Observable, tap, throwError, BehaviorSubject, Subscription, skip, lastValueFrom } from 'rxjs';
 import keys from '../../../marvel.json';
 import md5 from 'md5';
 import { IImage } from '../interfaces/IImage';
@@ -40,7 +40,7 @@ export class MarvelService {
     private searchInterval: ReturnType<typeof setTimeout> | null = null;
 
     constructor(private http: HttpClient, private settings: SettingsService) {
-        this.searchSubscription = this.searchObs.subscribe((search: string) => {
+        this.searchSubscription = this.searchObs.pipe(skip(1)).subscribe((search: string) => {
             if (this.searchInterval !== null) {
                 clearTimeout(this.searchInterval);
             }
@@ -67,7 +67,7 @@ export class MarvelService {
      * Add a character page
      */
     public addCharactersPage(): void {
-        if (this.searchInterval === null && this.characters.length >= this.page * this.limit) {
+        if (this.searchInterval === null && this.characters.length >= (this.page - 1) * this.limit) {
             const placeholders: Array<null> = new Array(this.limit).fill(null);
             this.setCharacters([...this.characters, ...placeholders]);
 
@@ -101,6 +101,37 @@ export class MarvelService {
     }
 
     /**
+     * Obtain a character already loaded in the application.
+     * If it can't find it, it asks marvel for it.
+     */
+    public async getCharacter(id: number): Promise<ICharacter | null> {
+        const index: number = this.characters.findIndex((character: ICharacter) => (character.id === id));
+
+        if (index !== -1) {
+            return this.characters[index];
+        } else {
+            try {
+                const auth: string = this.auth(1);
+                const query: string = this.query({ limit: 1, nameStartsWith: '', offset: 0 });
+                const obs: Observable<ICharacterDataWrapper> = this.http 
+                    .get<ICharacterDataWrapper>(`${this.BASE_URL}/v1/public/characters/${id}?${auth}&${query}`)
+                    .pipe(catchError(this.handleError));
+
+                const dataWrapper: ICharacterDataWrapper = await lastValueFrom(obs);
+                const { data: { results }} = dataWrapper;
+
+                if (results.length > 0) {
+                    return results[0];
+                }
+            } catch(error) {
+                /** Error handling stuff */
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Shortcut to get image src easily
      */
     public getSrc(image: IImage): string {
@@ -117,16 +148,17 @@ export class MarvelService {
         return `ts=${ts}&apikey=${keys.public}&hash=${this.hash(ts)}`
     }
 
+    /**
+     * Handle subscription errors
+     */
     private handleError(err: HttpErrorResponse) {
-
         let errorMessage = '';
         if (err.error instanceof ErrorEvent) {
-
             errorMessage = `An error occurred: ${err.error.message}`;
         } else {
-
             errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
         }
+
         console.error(errorMessage);
         return throwError(errorMessage);
     }
