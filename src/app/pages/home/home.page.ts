@@ -25,6 +25,9 @@ export class HomePage implements OnInit, OnDestroy {
             this.characters = characters;
             // console.dir(characters);
         });
+
+        console.dir('Pedimos página');
+        this.marvelService.addCharactersPage();
     }
 
     public ngOnDestroy(): void {}
