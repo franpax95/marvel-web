@@ -47,7 +47,6 @@
     }
 
     .fade-background {
-        // z-index: 1;
         height: 100%;
         width: 100%;
 
@@ -77,7 +76,6 @@
         color: white;
 
         display: grid;
-        // grid-template-columns: 100%;
         grid-template-rows: minmax(75px, 25%) 1fr minmax(45px, 15%);
 
         .name {
@@ -90,7 +88,6 @@
             h4 {
                 width: 100%;
                 padding-left: 1rem;
-                // white-space: nowrap;
                 transition: padding .3s ease-in .1s;
             }
         }
@@ -112,10 +109,6 @@
 
             font-family: 'Syncopate';
             text-transform: uppercase;
-
-            // & > * {
-            //     overflow: hidden;
-            // }
 
             .icon {
                 width: 100%;
@@ -174,6 +167,7 @@
         }
     }
 
+    &.mobile,
     &:hover {
         .image-background {
             img {
