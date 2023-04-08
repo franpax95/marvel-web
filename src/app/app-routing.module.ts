@@ -7,6 +7,11 @@ const routes: Routes = [
         loadChildren: () => import('./pages/home/home.page.module').then(m => m.HomeModule),
         canActivate: []
     },
+    {
+        path: ':id',
+        loadChildren: () => import('./pages/details/details.page.module').then(m => m.DetailsModule),
+        canActivate: []
+    },
 ];
 
 @NgModule({
