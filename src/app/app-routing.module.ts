@@ -5,12 +5,14 @@ const routes: Routes = [
     {
         path: '',
         loadChildren: () => import('./pages/home/home.page.module').then(m => m.HomeModule),
-        canActivate: []
+        canActivate: [],
+        data: { animationState: 'List' },
     },
     {
         path: ':id',
         loadChildren: () => import('./pages/details/details.page.module').then(m => m.DetailsModule),
-        canActivate: []
+        canActivate: [],
+        data: { animationState: 'Details' },
     },
 ];
 
