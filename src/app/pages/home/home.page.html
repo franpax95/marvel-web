@@ -1,12 +1,8 @@
 <div id="HomePage" class="HomePage">
-    <primary-button (onClick)="onModalOpen()">Abrir modal con anidación</primary-button>
-    <primary-button (onClick)="onClick()">Fake call</primary-button>
-    <primary-button [className]="'secondary'" (onClick)="onSearchBtnClick()">Fake search change</primary-button>
+    <app-header (onClick)="onHeaderClick($event)"></app-header>
 
     <label>Search:</label>
     <input [(ngModel)]="search" (ngModelChange)="onChange($event)" />
-
-    <!-- <div class="header" style="min-height: 100vh">Juan</div> -->
 
     <div id="character-list" class="character-list">
         <div class="character-container" *ngFor="let character of characters">
