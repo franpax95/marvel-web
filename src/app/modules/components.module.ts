@@ -1,3 +1,7 @@
+import { InfoIcon } from './../components/icons/info.icon';
+import { WikiIcon } from './../components/icons/wiki.icon';
+import { MarvelIcon } from './../components/icons/marvel.icon';
+import { SourceLinkComponent } from './../components/source-link/source-link.component';
 import { SpinnerComponent } from './../components/spinner/spinner.component';
 import { ComicCarouselComponent } from './../components/comic-carousel/comic-carousel.component';
 import { ComicCardComponent } from './../components/comic-card/comic-card.component';
@@ -18,10 +22,14 @@ const modules = [
     PrimaryButtonComponent,
     PrimaryModalComponent,
     SpinnerComponent,
+    SourceLinkComponent,
 ];
 
 const icons = [
-    ArrowRightIcon
+    ArrowRightIcon,
+    InfoIcon,
+    MarvelIcon,
+    WikiIcon,
 ];
 
 

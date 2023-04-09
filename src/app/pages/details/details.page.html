@@ -15,8 +15,9 @@
             <img [src]="getSrc()" [alt]="character.name" />
 
             <div class="sources">
-                <!-- TODO: Añadir botones de URLs -->
-                <button>Botón</button>
+                <ng-container *ngFor="let url of character.urls">
+                    <app-source-link [url]="url"></app-source-link>
+                </ng-container>
             </div>
         </div>
 

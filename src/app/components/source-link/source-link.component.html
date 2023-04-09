@@ -1,0 +1,18 @@
+<a
+    class="SourceLink"
+    [class]="url ? url.type : ''"
+    target="_blank"
+    [href]="url ? url.url : '#'"
+>
+    <div class="icon">
+        <info-icon *ngIf="url && url.type === types['DETAILS']"></info-icon>
+        <marvel-icon *ngIf="url && url.type === types['COMIC']"></marvel-icon>
+        <wiki-icon *ngIf="url && url.type === types['WIKI']"></wiki-icon>
+    </div>
+
+    <div class="text">
+        <span *ngIf="url && url.type === types['DETAILS']">See details</span>
+        <span *ngIf="url && url.type === types['COMIC']">Related comics</span>
+        <span *ngIf="url && url.type === types['WIKI']">See on wiki</span>
+    </div>
+</a>
