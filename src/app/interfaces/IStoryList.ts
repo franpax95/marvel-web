@@ -1,8 +1,8 @@
-import { IStory } from "./IStory";
+import { IStorySummary } from "./IStorySummary";
 
 export interface IStoryList {
     available: number;
     returned: number;
     collectionURI: string;
-    items: Array<IStory>;
+    items: Array<IStorySummary>;
 }

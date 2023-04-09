@@ -1,0 +1,18 @@
+<div class="ComicCardComponent">
+    <div class="image" *ngIf="current">
+        <img 
+            [ngClass]="{ hidden: loading }"
+            [src]="getSrc()" 
+            [alt]="current.title"
+            (load)="onImageLoaded($event)"
+        />
+    </div>
+
+    <div class="footer" *ngIf="current && !loading">
+        <h6>{{ current ? current.title : '' }}</h6>
+    </div>
+
+    <div class="spinner" *ngIf="loading">
+        <app-spinner></app-spinner>
+    </div>
+</div>

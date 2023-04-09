@@ -1,0 +1,40 @@
+.SpinnerComponent {
+    // pointer-events: none;
+    // width: 80px;
+    // height: 80px;
+
+    // position: fixed;
+    // top: 50%;
+    // left: 50%;
+
+    display: inline-block;
+
+    // transition-property: opacity;
+    // transition-timing-function: ease-out;
+    // transform: translate(-50%, -50%);
+
+    &:after {
+        content: " ";
+        display: block;
+        width: 64px;
+        height: 64px;
+        margin: 8px;
+        border-radius: 50%;
+        border: 6px solid #fff;
+        border-color: #fff transparent #fff transparent;
+        animation: spinner-animation 1.2s linear infinite;
+    }
+
+    // &.hide {
+    //     opacity: 0;
+    // }
+}
+
+@keyframes spinner-animation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

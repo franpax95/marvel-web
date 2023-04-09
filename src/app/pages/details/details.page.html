@@ -29,12 +29,9 @@
                 <p>{{ character.description + ' ' + character.description }}</p>
             </div>
 
-            <div class="comics">
+            <div class="comics" *ngIf="character.comics.items.length > 0">
                 <h4>Cómics</h4>
-                <p>
-                    <!-- TODO: Añadir comics cards -->
-                    Loren ipsum 
-                </p>
+                <app-comic-carousel [comics]="character.comics"></app-comic-carousel>
             </div>
         </div>
     </div>
@@ -44,4 +41,6 @@
     class="hide-spinner"
     [ngClass]="{ hide: !hide }" 
     [ngStyle]="{ 'transition-duration': HIDE_DURATION + 'ms'}"
-></div>
+>
+    <app-spinner></app-spinner>
+</div>

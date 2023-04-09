@@ -1,8 +1,8 @@
-import { ISerie } from "./ISerie";
+import { ISerieSummary } from "./ISerieSummary";
 
 export interface ISerieList {
     available: number;
     returned: number;
     collectionURI: string;
-    items: Array<ISerie>;
+    items: Array<ISerieSummary>;
 }
