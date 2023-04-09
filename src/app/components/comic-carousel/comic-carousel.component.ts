@@ -10,6 +10,13 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 export class ComicCarouselComponent {
     /** Comic collection */
     @Input() public comics: IComicList | null = null;
+    /** Responsive Options for carousel */
+    public responsiveOptions : Array<any> = [{
+        breakpoint: '600px',
+        numVisible: 1,
+        numScroll: 1
+    }];
 
     constructor() {}
+    
 }

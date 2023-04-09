@@ -54,11 +54,6 @@ export class CardComponent implements OnInit {
      * Notify the parent that the image is loaded to change loading status.
      */
     public onImageLoaded(event: Event): void {
-        // console.dir(event);
         this.loading = false;
-
-        // if (this.character) {
-        //     this.onLoad.emit(this.character.id);
-        // }
     }
 }

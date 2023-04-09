@@ -14,20 +14,20 @@
                 class="success"
                 [id]="'primary-modal-success-btn-' + level"
                 (click)="onAcceptClick($event)"
-            >Aceptar</button>
+            >Accept</button>
 
             <button 
                 *ngIf="conf.onCancel"
                 class="danger"
                 [id]="'primary-modal-danger-btn-' + level"
                 (click)="onCancelClick($event)"
-            >Cancelar</button>
+            >Cancel</button>
 
             <button 
                 *ngIf="!conf.onAccept && !conf.onCancel"
                 [id]="'primary-modal-default-btn-' + level"
                 (click)="onDefaultClick($event)"
-            >Cancelar</button>
+            >Cancel</button>
         </div>
     </div>
 </div>
