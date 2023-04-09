@@ -1,5 +1,11 @@
 <div class="ComicCarousel" *ngIf="comics">
-    <p-carousel [value]="comics.items" [numVisible]="2" [numScroll]="2" [circular]="true">
+    <p-carousel 
+        [value]="comics.items" 
+        [numVisible]="2" 
+        [numScroll]="2" 
+        [circular]="true"
+        [responsiveOptions]="responsiveOptions"
+    >
         <ng-template let-comic pTemplate="item">
             <app-comic-card [comic]="comic"></app-comic-card>
         </ng-template>

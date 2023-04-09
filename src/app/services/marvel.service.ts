@@ -6,6 +6,7 @@ import { SettingsService } from 'src/app/services/settings.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, tap, throwError, BehaviorSubject, Subscription, skip, lastValueFrom } from 'rxjs';
+// import keys from '../../../marvel.json';
 import keys from '../../../marvel_alternative_acc.json';
 import md5 from 'md5';
 import { IImage } from '../interfaces/IImage';
@@ -18,7 +19,7 @@ export class MarvelService {
     private readonly BASE_URL: string = 'https://gateway.marvel.com';
 
     /** Elements per 'page' */
-    private limit: number = 5;
+    private limit: number = 10;
     /** Current characters offset */
     private page: number = 0;
 
@@ -57,10 +58,7 @@ export class MarvelService {
                     this.page = Math.floor(100 / this.limit);
                 }
 
-                this.fetchCharacters({ limit: this.page * this.limit, nameStartsWith: search, offset: 0 })
-                    .subscribe(() => {
-                        // this.searchInterval = null;
-                    });
+                this.fetchCharacters({ limit: this.page * this.limit, nameStartsWith: search, offset: 0 }).subscribe();
             }, 250);
         });
     }
@@ -177,7 +175,7 @@ export class MarvelService {
     /**
      * Handle subscription errors
      */
-    private handleError(err: HttpErrorResponse) {
+    private handleError = (err: HttpErrorResponse) => {
         let errorMessage = '';
         if (err.error instanceof ErrorEvent) {
             errorMessage = `An error occurred: ${err.error.message}`;
@@ -186,6 +184,12 @@ export class MarvelService {
         }
 
         console.error(errorMessage);
+
+        this.settings.openModal({
+            title: 'ERROR',
+            content: ['Something went wrong... Please, try againt later.']
+        });
+
         return throwError(errorMessage);
     }
 

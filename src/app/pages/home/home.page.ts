@@ -12,14 +12,14 @@ export class HomePage implements OnInit, OnDestroy {
     /** Search */
     public search: string = '';
     /** Collection of characters */
-    public characters: Array<any> = [];
+    public characters: Array<ICharacter> = [];
     /** Subscription to characters */
     public charactersSubscription!: Subscription;
 
     constructor(private settings: SettingsService, private marvelService: MarvelService) { }
 
     public ngOnInit(): void {
-        this.charactersSubscription = this.marvelService.charactersObs.subscribe(characters => {
+        this.charactersSubscription = this.marvelService.charactersObs.subscribe((characters: Array<ICharacter>) => {
             this.characters = characters;
         });
 
