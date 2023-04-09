@@ -22,7 +22,17 @@
         </div>
 
         <div class="title">
-            <h1 [title]="character.name">{{ character.name }}</h1>
+            <h1 
+                [title]="character.name" 
+                [ngClass]="{ 
+                    'sm': character.name.length > 70, 
+                    'md': character.name.length < 70 && character.name.length > 35, 
+                    'lg': character.name.length < 35 && character.name.length > 15,
+                    'xl': character.name.length < 15
+                }"
+            >
+                {{ character.name }}
+            </h1>
         </div>
 
         <div class="content custom-scroll">

@@ -123,6 +123,11 @@
                 text-overflow: ellipsis;
                 white-space: nowrap;
                 overflow: hidden;
+
+                &.sm { font-size: var(--fs-sm) }
+                &.md { font-size: var(--fs-md) }
+                &.lg { font-size: var(--fs-lg) }
+                &.xl { font-size: var(--fs-xl) }
             }
         }
 
