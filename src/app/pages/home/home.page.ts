@@ -15,6 +15,8 @@ export class HomePage implements OnInit, OnDestroy {
     public characters: Array<ICharacter> = [];
     /** Subscription to characters */
     public charactersSubscription!: Subscription;
+    /** Subscription to search */
+    public searchSubscription!: Subscription;
 
     constructor(private settings: SettingsService, private marvelService: MarvelService) { }
 
@@ -23,12 +25,20 @@ export class HomePage implements OnInit, OnDestroy {
             this.characters = characters;
         });
 
+        this.searchSubscription = this.marvelService.searchObs.subscribe((search: string) => {
+            this.search = search;
+        });
+
         this.marvelService.addCharactersPage();
     }
 
     public ngOnDestroy(): void {
         if (this.charactersSubscription) {
             this.charactersSubscription.unsubscribe();
+        }
+
+        if (this.searchSubscription) {
+            this.searchSubscription.unsubscribe();
         }
     }
 
