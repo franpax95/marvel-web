@@ -1,14 +1,13 @@
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ICharacter } from './../../interfaces/ICharacter';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { MarvelService } from 'src/app/services/marvel.service';
 import { SettingsService } from 'src/app/services/settings.service';
-import { getPromise } from 'src/app/utils';
 
 @Component({
     templateUrl: './details.page.html',
-    styleUrls: ['./details.page.scss']
+    styleUrls: ['./details.page.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 export class DetailsPage implements OnInit, OnDestroy {
     /** Transition duration for hide screen (ms) */

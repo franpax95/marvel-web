@@ -1,3 +1,4 @@
+import { ArrowLeftIcon } from './../components/icons/arrow-left.icon';
 import { InfoIcon } from './../components/icons/info.icon';
 import { WikiIcon } from './../components/icons/wiki.icon';
 import { MarvelIcon } from './../components/icons/marvel.icon';
@@ -27,6 +28,7 @@ const modules = [
 
 const icons = [
     ArrowRightIcon,
+    ArrowLeftIcon,
     InfoIcon,
     MarvelIcon,
     WikiIcon,
