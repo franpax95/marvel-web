@@ -32,21 +32,28 @@ export class HomePage implements OnInit, OnDestroy {
 
     public ngOnDestroy(): void {}
 
-
+    /**
+     * Add a character page if intersecting
+     */
     public isIntersecting (status: boolean): void {
         if (!this.characters.some((character: ICharacter) => (character === null))) {
             this.marvelService.addCharactersPage();
         }
     }
 
-    public onClick(): void {
-        this.marvelService.addCharactersPage();
+    /**
+     * Scroll to the init of the character list
+     */
+    public onHeaderClick(event: MouseEvent): void {
+        const htmlDOM: HTMLElement | null = document.querySelector('.empty');
+        if (htmlDOM) {
+            htmlDOM.scrollIntoView({ behavior: 'smooth' });
+        }
     }
 
-    onSearchBtnClick(): void {
-        this.marvelService.setSearch('A');
-    }
-
+    /**
+     * 'Change' event handler for search input
+     */
     public onChange(search: string): void {
         this.marvelService.setSearch(search);
     }

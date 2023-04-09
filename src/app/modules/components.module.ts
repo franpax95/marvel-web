@@ -1,3 +1,4 @@
+import { HeaderComponent } from './../components/header/header.component';
 import { ArrowLeftIcon } from './../components/icons/arrow-left.icon';
 import { InfoIcon } from './../components/icons/info.icon';
 import { WikiIcon } from './../components/icons/wiki.icon';
@@ -20,6 +21,7 @@ const modules = [
     CardComponent,
     ComicCardComponent,
     ComicCarouselComponent,
+    HeaderComponent,
     PrimaryButtonComponent,
     PrimaryModalComponent,
     SpinnerComponent,

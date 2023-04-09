@@ -6,13 +6,14 @@
     width: 100%;
     width: fit-content;
     max-width: 200px;
-    padding: 1rem .6rem;
+    padding: 1rem 1.5rem;
 
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 
+    clip-path: polygon(100% 0, 100% 75%, 90% 100%, 0 100%, 0 25%, 10% 0);
     outline: none;
     border: none;
     background-color: var(--primary);
