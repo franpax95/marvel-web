@@ -3,7 +3,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { MarvelService } from 'src/app/services/marvel.service';
 import { SettingsService } from 'src/app/services/settings.service';
-import { getPromise } from 'src/app/utils';
 
 @Component({
     templateUrl: './home.page.html',
@@ -12,7 +11,6 @@ import { getPromise } from 'src/app/utils';
 export class HomePage implements OnInit, OnDestroy {
     /** Search */
     public search: string = '';
-
     /** Collection of characters */
     public characters: Array<any> = [];
     /** Subscription to characters */
@@ -23,14 +21,16 @@ export class HomePage implements OnInit, OnDestroy {
     public ngOnInit(): void {
         this.charactersSubscription = this.marvelService.charactersObs.subscribe(characters => {
             this.characters = characters;
-            // console.dir(characters);
         });
 
-        console.dir('Pedimos página');
         this.marvelService.addCharactersPage();
     }
 
-    public ngOnDestroy(): void {}
+    public ngOnDestroy(): void {
+        if (this.charactersSubscription) {
+            this.charactersSubscription.unsubscribe();
+        }
+    }
 
     /**
      * Add a character page if intersecting
@@ -45,7 +45,7 @@ export class HomePage implements OnInit, OnDestroy {
      * Scroll to the init of the character list
      */
     public onHeaderClick(event: MouseEvent): void {
-        const htmlDOM: HTMLElement | null = document.querySelector('.empty');
+        const htmlDOM: HTMLElement | null = document.querySelector('.search-container');
         if (htmlDOM) {
             htmlDOM.scrollIntoView({ behavior: 'smooth' });
         }
@@ -56,38 +56,5 @@ export class HomePage implements OnInit, OnDestroy {
      */
     public onChange(search: string): void {
         this.marvelService.setSearch(search);
-    }
-
-    /**
-     * Manejador de eventos del botón para lanzar modales anidados
-     */
-    public onModalOpen(): void {
-        /**
-         * Ejemplo de display de modales anidados.
-         */
-        this.settings.openModal({
-            title: 'Primer Modal',
-            content: ['Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut blandit rutrum sapien id tempor. Cras.'],
-            onAccept: () => {
-                this.settings.openModal({
-                    title: 'Segundo Modal',
-                    content: ['Modal de pruebas'],
-                    onAccept: () => this.settings.closeAllModals(),
-                    onCancel: () => {}
-                });
-
-                // Necesario para no cerrar el modal que intentamos abrir de inmediato
-                return false;
-            },
-            onCancel: () => {
-                this.settings.openModal({
-                    title: 'Modal de Cancelación',
-                    content: ['Has cancelado el modal de pruebas correctamente'],
-                    onAccept: () => this.settings.closeAllModals(),
-                });
-
-                return false;
-            }
-        });
     }
 }

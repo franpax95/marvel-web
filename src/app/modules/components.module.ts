@@ -1,3 +1,5 @@
+import { SearchIcon } from './../components/icons/search-icon';
+import { SearchInputComponent } from './../components/search-input/search-input.component';
 import { HeaderComponent } from './../components/header/header.component';
 import { ArrowLeftIcon } from './../components/icons/arrow-left.icon';
 import { InfoIcon } from './../components/icons/info.icon';
@@ -25,6 +27,7 @@ const modules = [
     PrimaryButtonComponent,
     PrimaryModalComponent,
     SpinnerComponent,
+    SearchInputComponent,
     SourceLinkComponent,
 ];
 
@@ -33,6 +36,7 @@ const icons = [
     ArrowLeftIcon,
     InfoIcon,
     MarvelIcon,
+    SearchIcon,
     WikiIcon,
 ];
 

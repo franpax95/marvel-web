@@ -1,0 +1,11 @@
+<div class="SearchInputComponent">
+    <input 
+        placeholder="Search character..."
+        [(ngModel)]="value"
+        (ngModelChange)="onInputChange($event)"
+    />
+
+    <div class="icon">
+        <search-icon></search-icon>
+    </div>
+</div>
