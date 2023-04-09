@@ -1,0 +1,51 @@
+<div 
+    id="DetailsPage" 
+    class="DetailsPage"
+    [ngClass]="{ hide }"
+    [ngStyle]="{ 'transition-duration': HIDE_DURATION + 'ms' }"
+    *ngIf="character"
+>
+    <div class="background">
+        <img [src]="getSrc()" [alt]="character.name" (load)="onImageLoaded($event)" />
+        <div class="cover"></div>
+    </div>
+
+    <div class="details-wrapper custom-scroll">
+        <div class="preview">
+            <img [src]="getSrc()" [alt]="character.name" />
+
+            <div class="sources">
+                <ng-container *ngFor="let url of character.urls">
+                    <app-source-link [url]="url"></app-source-link>
+                </ng-container>
+            </div>
+        </div>
+
+        <div class="title">
+            <h1 [title]="character.name">{{ character.name }}</h1>
+        </div>
+
+        <div class="content custom-scroll">
+            <div class="description" *ngIf="character.description !== ''">
+                <p>{{ character.description + ' ' + character.description }}</p>
+            </div>
+
+            <div class="comics" *ngIf="character.comics.items.length > 0">
+                <h4>Cómics</h4>
+                <app-comic-carousel [comics]="character.comics"></app-comic-carousel>
+            </div>
+        </div>
+
+        <a class="back-btn" [routerLink]="['/']">
+            <arrow-left-icon></arrow-left-icon>
+        </a>
+    </div>
+</div>
+
+<div 
+    class="hide-spinner"
+    [ngClass]="{ hide: !hide }" 
+    [ngStyle]="{ 'transition-duration': HIDE_DURATION + 'ms'}"
+>
+    <app-spinner></app-spinner>
+</div>

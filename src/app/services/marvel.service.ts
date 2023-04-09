@@ -1,10 +1,12 @@
+import { IComicDataWrapper } from './../interfaces/IComicDataWrapper';
+import { IComic } from './../interfaces/IComic';
 import { ICharacterDataWrapper } from './../interfaces/ICharacterDataWrapper';
 import { ICharacter } from './../interfaces/ICharacter';
 import { SettingsService } from 'src/app/services/settings.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, Observable, tap, throwError, BehaviorSubject, Subscription, skip, lastValueFrom } from 'rxjs';
-import keys from '../../../marvel.json';
+import keys from '../../../marvel_alternative_acc.json';
 import md5 from 'md5';
 import { IImage } from '../interfaces/IImage';
 
@@ -126,6 +128,30 @@ export class MarvelService {
             } catch(error) {
                 /** Error handling stuff */
             }
+        }
+
+        return null;
+    }
+
+    /**
+     * Get a comic with the url passed as argument
+     */
+    public async getComic(url: string): Promise<IComic | null> {
+        try {
+            const auth: string = this.auth(1);
+            const query: string = this.query({ limit: 1, nameStartsWith: '', offset: 0 });
+            const obs: Observable<IComicDataWrapper> = this.http 
+                .get<IComicDataWrapper>(`${url}?${auth}&${query}`)
+                .pipe(catchError(this.handleError));
+
+            const dataWrapper: IComicDataWrapper = await lastValueFrom(obs);
+            const { data: { results }} = dataWrapper;
+
+            if (results.length > 0) {
+                return results[0];
+            }
+        } catch(error) {
+            /** Error handling stuff */
         }
 
         return null;

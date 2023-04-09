@@ -1,8 +1,8 @@
-import { IComic } from "./IComic";
+import { IComicSummary } from "./IComicSummary";
 
 export interface IComicList {
     available: number;
     returned: number;
     collectionURI: string;
-    items: Array<IComic>;
+    items: Array<IComicSummary>;
 }

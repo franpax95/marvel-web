@@ -1,8 +1,8 @@
-import { IEvent } from "./IEvent";
+import { IEventSummary } from "./IEventSummary";
 
 export interface IEventList {
     available: number;
     returned: number;
     collectionURI: string;
-    items: Array<IEvent>;
+    items: Array<IEventSummary>;
 }
